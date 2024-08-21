@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Simplify",
-  "version": "1.0",
   "description": "Display articles without useless gibberish and get AI-generated summaries.",
+  "version": "1.0",
   "permissions": [
+    "tabs",
     "activeTab",
     "scripting"
   ],
