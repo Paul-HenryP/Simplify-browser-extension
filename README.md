@@ -51,7 +51,7 @@ To edit this extension, follow these steps:
 - Add your own JavaScript code in src/index.js.
 - Load the extension into your browser:
 
-  - For Chrome:
+  - For Chrome / Opera:
 
     - Go to `chrome://extensions/`
     - Enable "Developer mode"
