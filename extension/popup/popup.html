@@ -5,15 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplify</title>
     <style>
-        body { display: block; width: max-content; background-color: #fff; font-family:Arial, sans-serif; padding: 10px; }
-        button { margin-top: 10px; padding: 10px; width: 100%; color: #fff; background: #333; border-radius: 6px;}
-        #app{display: flex; flex-direction: column; justify-content: center; color: #333;}
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        body {width: 16.1rem; display: block; font-family: inherit; background-color: #f9f9f9; font-family:Arial, sans-serif; padding: 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);}
+        .header {display: flex; flex-direction: column; align-items: center; position: relative; margin-bottom: 15px;}
+        h2{font-weight: 500; margin-bottom: 15px;}
+        button { margin-top: 10px; padding: 10px; width: 100%; color: #fff; background: #333; border-radius: 8px; border: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 16px; font-weight: 600; transition: background 0.3s ease, transform 0.3s ease; cursor: pointer; letter-spacing: 1px;}
+        button:hover {background: #555; transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);}
+        button:active {transform: translateY(0); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+        #app{text-align: center;}
+        p{font-size: 14px; color: #555; margin-bottom: 20px; line-height: 1.5;}
+        .share-icon {font-size: 20px; color: #333; cursor: pointer; transition: color 0.3s ease; position: absolute; right: 0; top:0;}
+        .share-icon:hover {color: #555;}
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div id="app">
-        <h2>Simplify</h2>
-        <p>Click the button to summarize the current article.</p>
+        <div class="header">
+            <h2>Simplify</h2>
+            <i class="fas fa-share-alt share-icon"></i>
+        </div>
+        <p>Click the button to summarize the current website.</p>
         <button id="simplify-btn">Simplify</button>
     </div>
 </body>
