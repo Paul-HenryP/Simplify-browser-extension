@@ -1,1 +1,9 @@
-// Content script is empty for now. All actions are handled in popup.js and background.js.
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+console.log("hello world!");
+/******/ })()
+;
+//# sourceMappingURL=content.js.map
