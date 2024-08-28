@@ -76,10 +76,6 @@ To edit this extension, follow these steps:
 3. The page will automatically filter out unnecessary content and display a summarized version of the article.
 4. Customize the summarization settings by clicking on the settings icon within the extension popup.
 
-## Development
-
-After downloading this repo, `use code .` to open it in VS Code. Then, in the terminal, use `npm install`.
-
 ## Webpack
 
 This boilerplate also includes Webpack, a popular module bundler for JavaScript applications. Webpack is used to bundle all the JavaScript code and dependencies into a single file, making it easier to manage and deploy the code.
@@ -103,13 +99,17 @@ These scripts provide a convenient way to build and manage the extension, and ca
 
 ### Contributing
 
-We welcome contributions! Please fork the repository and submit a pull request with your improvements or bug fixes.
+I welcome contributions! Please fork the repository and submit a pull request with your improvements or bug fixes.
 
 1. Fork the repo.
 2. Create a new branch (`git checkout -b feature/your-feature`).
 3. Commit your changes (`git commit -am 'Add some feature'`).
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Create a new Pull Request.
+
+   ## Development
+
+After downloading this repo, use `code .` to open it in VS Code. Then, in the terminal, use `npm install`.
 
 ## License
 
