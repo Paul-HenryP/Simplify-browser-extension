@@ -2,6 +2,12 @@
 
 Simplify is a browser extension designed to enhance your online reading experience. It automatically removes unnecessary content from articles and provides you with a concise, AI-generated summary. Save time and focus on what truly matters!
 
+## How it works
+
+- Open a website you want to summarize.
+- **Make sure you are logged into your ChatGPT account on your browser or just open it in a different tab.**
+- Use the extension while on the article tab.
+
 ## Features
 
 - **Content Filtering**: Automatically removes ads, pop-ups, and other irrelevant content.
