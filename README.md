@@ -88,7 +88,7 @@ To configure Webpack for your own needs, you can edit the webpack.config.js file
 
 ## NPM Scripts
 
-This boilerplate also includes a set of npm scripts that you can use to build and manage your extension. The following scripts are available:
+This repo also includes a set of npm scripts that you can use to build and manage your extension. The following scripts are available:
 
 - `npm run build-dev`: Builds the extension in development mode, using Webpack's development settings.
 - `npm run build-prod`: Builds the extension in production mode, using Webpack's production settings for code optimization and minification.
