@@ -78,6 +78,8 @@ To edit this extension, follow these steps:
 
 ## Development
 
+After downloading this repo, `use code .` to open it in VS Code. Then, in the terminal, use `npm install`.
+
 ## Webpack
 
 This boilerplate also includes Webpack, a popular module bundler for JavaScript applications. Webpack is used to bundle all the JavaScript code and dependencies into a single file, making it easier to manage and deploy the code.
