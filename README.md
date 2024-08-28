@@ -97,11 +97,11 @@ This boilerplate also includes a set of npm scripts that you can use to build an
 
 These scripts provide a convenient way to build and manage the extension, and can be customized to suit your specific needs. You can also add your own scripts to the package.json file to automate other tasks related to your extension development.
 
-### Contributing
+## Contributing
 
 I welcome contributions! Please fork the repository and submit a pull request with your improvements or bug fixes.
 
-## Development
+### Development
 
 After downloading this repo, use 
 
@@ -121,6 +121,6 @@ and
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Create a new Pull Request.
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
