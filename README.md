@@ -78,13 +78,13 @@ To edit this extension, follow these steps:
 
 ## Webpack
 
-This boilerplate also includes Webpack, a popular module bundler for JavaScript applications. Webpack is used to bundle all the JavaScript code and dependencies into a single file, making it easier to manage and deploy the code.
+This repo also includes Webpack, a popular module bundler for JavaScript applications. Webpack is used to bundle all the JavaScript code and dependencies into a single file, making it easier to manage and deploy the code.
 
-In this boilerplate, Webpack is configured to take src/index.js as the entry point and output the bundle to content.js. This means that all the JavaScript code written in src/index.js as well as any dependencies imported into that file will be bundled together into a single file called content.js.
+In this repo, Webpack is configured to take src/index.js as the entry point and output the bundle to content.js. This means that all the JavaScript code written in src/index.js as well as any dependencies imported into that file will be bundled together into a single file called content.js.
 
 By using Webpack, you can take advantage of its features such as code splitting, hot module replacement, and tree shaking to optimize your code and improve the performance of your extension.
 
-To configure Webpack for your own needs, you can edit the webpack.config.js file included in this boilerplate. You can customize the entry point, output file name, and various other settings to suit your specific requirements.
+To configure Webpack for your own needs, you can edit the webpack.config.js file included in this repo. You can customize the entry point, output file name, and various other settings to suit your specific requirements.
 
 ## NPM Scripts
 
