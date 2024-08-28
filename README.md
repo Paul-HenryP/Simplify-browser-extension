@@ -101,15 +101,25 @@ These scripts provide a convenient way to build and manage the extension, and ca
 
 I welcome contributions! Please fork the repository and submit a pull request with your improvements or bug fixes.
 
+## Development
+
+After downloading this repo, use 
+
+```code .``` 
+
+to open it in VS Code. Then, in the terminal, use 
+
+```npm install```
+
+and
+
+```npm run-dev```
+
 1. Fork the repo.
 2. Create a new branch (`git checkout -b feature/your-feature`).
 3. Commit your changes (`git commit -am 'Add some feature'`).
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Create a new Pull Request.
-
-   ## Development
-
-After downloading this repo, use `code .` to open it in VS Code. Then, in the terminal, use `npm install`.
 
 ## License
 
