@@ -20,7 +20,7 @@ Simplify is a browser extension designed to enhance your online reading experien
 The folder structure is as follows:
 
 ```
-my-extension/
+Simplify-browser-extension/
 ├── extension/
 │   ├── background.js
 │   ├── content.js
