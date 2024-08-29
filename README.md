@@ -7,6 +7,11 @@ Simplify is a browser extension designed to enhance your online reading experien
 - Open a website you want to summarize.
 - **Make sure you are logged into your ChatGPT account on your browser or just open it in a different tab.**
 - Use the extension while on the article tab.
+- The extension will automatically filter out unnecessary content and display a summarized version of the website.
+
+## Future development ideas:
+
+- Customize the summarization settings by clicking on the settings icon within the extension popup.
 
 ## Features
 
@@ -42,40 +47,6 @@ Simplify-browser-extension/
 
 ```
 
-## Getting Started
-
-To edit this extension, follow these steps:
-
-- Clone the repository or download the ZIP file.
-
-  ```bash
-  git clone https://github.com/yourusername/simplify.git
-  ```
-
-- Edit manifest.json file to add the required information about the extension.
-- Customize popup.html as per your needs.
-- Add your own JavaScript code in src/index.js.
-- Load the extension into your browser:
-
-  - For Chrome / Opera:
-
-    - Go to `chrome://extensions/`
-    - Enable "Developer mode"
-    - Click "Load unpacked"
-    - Selecting the folder that contains the extension files.
-
-  - For Firefox:
-    - Go to `about:debugging#/runtime/this-firefox`
-    - Click "Load Temporary Add-on"
-    - ... (Update)
-
-## Usage
-
-1. Visit any article or some webpage.
-2. Click on the Simplify extension icon in your browser's toolbar.
-3. The page will automatically filter out unnecessary content and display a summarized version of the article.
-4. Customize the summarization settings by clicking on the settings icon within the extension popup.
-
 ## Webpack
 
 This repo also includes Webpack, a popular module bundler for JavaScript applications. Webpack is used to bundle all the JavaScript code and dependencies into a single file, making it easier to manage and deploy the code.
@@ -103,6 +74,13 @@ I welcome contributions! Please fork the repository and submit a pull request wi
 
 ### Development
 
+To edit this extension, follow these steps:
+
+- Clone the repository or download the ZIP file.
+
+  ```bash
+  git clone https://github.com/yourusername/simplify.git
+  ```
 After downloading this repo, use
 
 `code .`
@@ -114,6 +92,23 @@ to open it in VS Code. Then, in the terminal, use
 and
 
 `npm run-dev`
+
+- Edit manifest.json file to add the required information about the extension.
+- Customize popup.html.
+- Add your own JavaScript code in src/index.js.
+- Load the extension into your browser:
+
+  - For Chrome / Opera:
+
+    - Go to `chrome://extensions/`
+    - Enable "Developer mode"
+    - Click "Load unpacked"
+    - Selecting the folder that contains the extension files.
+
+  - For Firefox:
+    - Go to `about:debugging#/runtime/this-firefox`
+    - Click "Load Temporary Add-on"
+    - ... (TODO)
 
 1. Fork the repo.
 2. Create a new branch (`git checkout -b feature/your-feature`).
