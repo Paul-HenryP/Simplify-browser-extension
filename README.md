@@ -103,17 +103,17 @@ I welcome contributions! Please fork the repository and submit a pull request wi
 
 ### Development
 
-After downloading this repo, use 
+After downloading this repo, use
 
-```code .``` 
+`code .`
 
-to open it in VS Code. Then, in the terminal, use 
+to open it in VS Code. Then, in the terminal, use
 
-```npm install```
+`npm install`
 
 and
 
-```npm run-dev```
+`npm run-dev`
 
 1. Fork the repo.
 2. Create a new branch (`git checkout -b feature/your-feature`).
