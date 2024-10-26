@@ -1,63 +1,124 @@
 class ChatGPTExtension {
-
     constructor() {
-        console.log("ChatGPTExtension initialized: index.js"); // Log initialization
-        this.promptInjected = false; // Flag to prevent multiple injections
+        console.log("ChatGPTExtension initialized");
+        this.promptInjected = false;
+        this.pageContent = '';
         this.handleRequest();
     }
 
     handleRequest() {
         chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-            console.log("Message received in content.js:", request); // Log received message
+            console.log("Content script received message:", request);
+            
             if (request.action === "PROMPT") {
-                console.log("PROMPT action recognized"); // Log action recognition
+                console.log("PROMPT action recognized");
+                this.gatherPageContent();
+                // Always send a response
+                sendResponse({ success: true });
                 this.promptToChatGPT();
             }
+            
             if (request.action === "PROMPT_PROCEED" && !this.promptInjected) {
-                console.log("PROMPT PROCEED inject prompt to summarize action recognized"); // Log action recognition
+                console.log("PROMPT_PROCEED received");
+                this.pageContent = request.content;
                 this.promptOnChatGPTPage();
-                this.promptInjected = true; // Set flag to prevent reinjection
+                this.promptInjected = true;
+                // Always send a response
+                sendResponse({ success: true });
             }
+            
+            // Return true to indicate we'll send a response asynchronously
+            return true;
         });
+    }
+
+    gatherPageContent() {
+        let content = '';
+        const article = document.querySelector('article');
+        
+        if (article) {
+            content = article.innerText;
+        } else {
+            const paragraphs = document.querySelectorAll('p');
+            content = Array.from(paragraphs)
+                .map(p => p.innerText)
+                .filter(text => text.trim().length > 0)
+                .join('\n\n');
+        }
+
+        this.pageContent = content;
+        console.log("Content gathered, length:", this.pageContent.length);
     }
     
     promptToChatGPT() {
-        console.log("We gathered the info and are prompting to ChatGPT...");
-        const prompt = "From now on, if you need to summarize text given to you from an article or a website, write a short summary of the text displayed on the website mentioning the important aspects of that content."; // Get this from the summarizable website
-        //Plan:
-        //here gathers promptable info from website: index.js
-        // Send message to background script to open ChatGPT page
-        chrome.runtime.sendMessage({ action: "OPEN_CHATGPT" });
+        return new Promise((resolve) => {
+            chrome.runtime.sendMessage({
+                action: "OPEN_CHATGPT",
+                content: this.pageContent
+            }, (response) => {
+                console.log("Got response from background:", response);
+                resolve(response);
+            });
+        });
     }
 
-    promptOnChatGPTPage() {
-        if (window.location.href === "https://chatgpt.com/") { // Ensure this URL is correct
-            console.log("On ChatGPT page, attempting to inject prompt...");
-            let retryCount = 0; // Initialize retry counter
-            const maxRetries = 20; // Maximum number of retries
-            const intervalId = setInterval(() => {
-                const input = document.querySelector("textarea");
-                const button = document.querySelector("textarea~button");
-    
-                if (input && button) {
-                    const prompt = "From now on, if you need to summarize text given to you from an article or a website, write a short summary of the text displayed on the website mentioning the important aspects of that content.";
-                    input.value = prompt;
-                    button.click();
-                    console.log("Prompt injected and button clicked.");
-                    clearInterval(intervalId); // Stop checking once done
-                } else {
-                    console.log("Textarea or button not found, retrying...");
-                    retryCount++;
-                    if (retryCount >= maxRetries) {
-                        console.error("Max retries reached. Stopping.");
-                        clearInterval(intervalId); // Stop checking after max retries
+    async promptOnChatGPTPage() {
+        if (!window.location.href.includes("chat.openai.com")) {
+            console.error("Not on ChatGPT page");
+            return;
+        }
+
+        console.log("Waiting for ChatGPT elements...");
+        
+        const findElements = () => {
+            return new Promise((resolve) => {
+                let attempts = 0;
+                const maxAttempts = 20;
+                
+                const interval = setInterval(() => {
+                    const textarea = document.querySelector('#prompt-textarea');
+                    const button = textarea?.closest('form')?.querySelector('button[type="submit"]');
+                    
+                    if (textarea && button) {
+                        clearInterval(interval);
+                        resolve({ textarea, button });
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(interval);
+                        resolve(null);
                     }
+                    attempts++;
+                }, 500);
+            });
+        };
+
+        const elements = await findElements();
+        
+        if (elements) {
+            const { textarea, button } = elements;
+            console.log("Found ChatGPT elements, injecting prompt...");
+            
+            // Create and inject the prompt
+            const prompt = `Please summarize this text:\n\n${this.pageContent}`;
+            
+            // Set value and dispatch events
+            textarea.value = prompt;
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            textarea.dispatchEvent(new Event('change', { bubbles: true }));
+            
+            // Click the button after a short delay
+            setTimeout(() => {
+                if (!button.disabled) {
+                    button.click();
+                    console.log("Prompt submitted successfully");
+                } else {
+                    console.error("Submit button is disabled");
                 }
-            }, 1000); // Retry every 1000ms (1 second)
+            }, 100);
         } else {
-            console.error("Not on ChatGPT page. Current URL:", window.location.href);
+            console.error("Could not find ChatGPT elements");
         }
     }
 }
 
+// Initialize the extension
 const CGPTExtension = new ChatGPTExtension();

@@ -6,6 +6,7 @@
   "permissions": [
     "tabs",
     "activeTab",
+    "storage",
     "scripting"
   ],
   "background": {
@@ -32,6 +33,7 @@
     }
   ],
   "host_permissions": [
+    "https://chat.openai.com/*",
     "*://*/*"
   ]
 }

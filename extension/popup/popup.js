@@ -1,52 +1,80 @@
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const [currentTab] = await chrome.tabs.query({active: true, currentWindow: true});
-
-    document.getElementById('simplify-btn').addEventListener('click', async () => {
-        //console.log(currentTab); //for testing
-        console.log("Prompting from popup.js"); //for testing
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('simplify-btn');
+    
+    button.addEventListener('click', async () => {
+        button.disabled = true;
         
-        await chrome.tabs.sendMessage(currentTab.id, {action: "PROMPT", message: "Prompting to ChatGPT"});
-
-        /* chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-            if (request.action === "OPEN_CHATGPT") {
-                chrome.tabs.create({ url: "https://chat.openai.com/" }, (tab) => {
-                    // Wait for the tab to fully load, then send a message to the content script
-                    chrome.tabs.onUpdated.addListener(function onUpdated(tabId, changeInfo) {
-                        if (tabId === tab.id && changeInfo.status === 'complete') {
-                            chrome.tabs.sendMessage(tabId, { action: "PROMPT PROCEED" });
-                            chrome.tabs.onUpdated.removeListener(onUpdated);  // Remove listener after completion
-                        }
-                    });
-                });
-            }
-        }); */
-        
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => { // old idea
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                function: simplifyArticle
+        try {
+            // Get the current tab
+            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            
+            // Inject the content script
+            await chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                files: ['content.js']
             });
-        });
+            
+            // Send the PROMPT message and wait for response
+            const response = await chrome.tabs.sendMessage(tab.id, { 
+                action: "PROMPT"
+            });
+            
+            if (!response || !response.success) {
+                throw new Error('Failed to send prompt');
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            button.disabled = false;
+        }
     });
 });
 
-function simplifyArticle() {
-    // Select article content, filter out unnecessary elements
-    let article = document.querySelector('article');
-    if (article) {
-        let unwantedElements = article.querySelectorAll('aside, nav, footer, .ad, .popup, .subscribe, .comments');
-        unwantedElements.forEach(el => el.remove());
 
-        // Simplify the remaining text
-        let articleText = article.innerText;
+
+function simplifyArticle() {
+    // Try to select article content first
+    let content = document.querySelector('article');
+    
+    if (!content) {
+        // If no article is found, try to get paragraphs
+        content = document.querySelectorAll('p');
+    } else {
+        // If article is found, filter out unnecessary elements
+        let unwantedElements = content.querySelectorAll('aside, nav, footer, .ad, .popup, .subscribe, .comments');
+        unwantedElements.forEach(el => el.remove());
+    }
+    
+    let textContent = '';
+    
+    if (content) {
+        // Get text based on whether content is a single element or NodeList
+        if (content instanceof NodeList) {
+            content.forEach(paragraph => {
+                textContent += paragraph.innerText + '\n';
+            });
+        } else {
+            textContent = content.innerText;
+        }
+        
         // Call background script to summarize the text using AI
-        chrome.runtime.sendMessage({ text: articleText }, (response) => {
-            article.innerText = response.summary;
-            
-            alert(response.summary);// for testing
+        chrome.runtime.sendMessage({ text: textContent }, (response) => {
+            if (response && response.summary) {
+                if (content instanceof NodeList) {
+                    // Display the summary in an alert
+                    alert(response.summary);
+                } else {
+                    // Replace original content with the summarized text
+                    content.innerText = response.summary;
+                    alert(response.summary); // For testing
+                }
+            } else {
+                alert('Failed to get a summary from the background script.');
+            }
         });
     } else {
-        alert('No article found on this page.');
+        alert('No relevant content found on this page.');
     }
 }
