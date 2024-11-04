@@ -1,11 +1,12 @@
-// Character limit.
-const CHARACTER_LIMIT = 1000;
+document.addEventListener('DOMContentLoaded', () => {
+  chrome.runtime.onMessage.addListener((request) => {
+    if (request.action === 'displaySummary') {
+      displaySummary(request.summary);
+    }
+  });
+});
 
-function getPageText() {
-  // Gets all visible text from the page.
-  let text = document.body.innerText || document.body.textContent;
-  return text.slice(0, CHARACTER_LIMIT); // Trims text to the character limit.
+function displaySummary(summary) {
+  const summaryElement = document.getElementById('summary');
+  summaryElement.textContent = summary;
 }
-
-// Sends the text to the background script.
-chrome.runtime.sendMessage({ action: 'getSummary', text: getPageText() });
