@@ -1,15 +1,13 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'getSummary') {
-    callSummarizeAPI(request.text)
-      .then(summary => {
-        chrome.runtime.sendMessage({ action: 'displaySummary', summary });
-      })
-      .catch(error => console.error('Error fetching summary:', error));
+  if (request.action === 'sendForSummary') {
+    callSummarizeAPI(request.text).then(summary => {
+      chrome.runtime.sendMessage({ action: 'displaySummary', summary });
+    }).catch(error => console.error('Error fetching summary:', error));
   }
 });
 
 async function callSummarizeAPI(text) {
-  const response = await fetch('https://your-server.com/summarize', { /*Replace https://your-server.com/summarize with your server’s actual URL.*/
+  const response = await fetch('https://your-server.com/summarize', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text })
