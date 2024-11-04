@@ -15,7 +15,6 @@ Simplify is a browser extension designed to enhance your online reading experien
 
 ## Features
 
-- **Content Filtering**: Automatically removes ads, pop-ups, and other irrelevant content.
 - **AI-Powered Summarization**: Generates a brief summary of the article using AI.
 - **Customizable Settings**: Adjust the level of summarization to suit your needs.
 - **Lightweight and Fast**: Minimal impact on your browser's performance.
