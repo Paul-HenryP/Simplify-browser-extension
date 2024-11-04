@@ -1,5 +1,22 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'sendForSummary') {
+    // Instead of calling the server, return a mock summary for testing
+    const mockSummary = generateMockSummary(request.text); // Simulate a summarized response
+    chrome.runtime.sendMessage({ action: 'displaySummary', summary: mockSummary });
+  }
+});
+
+// generate a mock summary for testing.
+function generateMockSummary(text) {
+  // This is a simple placeholder for testing purposes.
+  const summary = `This is a mock summary of the text: "${text.slice(0, 50)}..."`;
+  return summary;
+}
+
+/*Below is real version code*/
+/*
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'sendForSummary') {
     callSummarizeAPI(request.text).then(summary => {
       chrome.runtime.sendMessage({ action: 'displaySummary', summary });
     }).catch(error => console.error('Error fetching summary:', error));
@@ -18,9 +35,9 @@ async function callSummarizeAPI(text) {
   return data.summary;
 }
 
+*/
 
-
-
+/*Below is server code*/
 /*
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'summarize') {
