@@ -91,7 +91,7 @@ to open it in VS Code. Then, in the terminal, use
 
 and
 
-`npm run-dev`
+`npm run build-dev`
 
 - Edit manifest.json file to add the required information about the extension.
 - Customize popup.html.
