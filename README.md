@@ -94,10 +94,9 @@ and
 
 `npm run build-dev`
 
-- Edit manifest.json file to add the required information about the extension.
 - Customize popup.html.
 - Add your own JavaScript code in src/index.js.
-- Load the extension into your browser:
+- Load the extension into your browser for testing:
 
   - For Chrome / Opera:
 
@@ -110,6 +109,8 @@ and
     - Go to `about:debugging#/runtime/this-firefox`
     - Click "Load Temporary Add-on"
     - ... (TODO)
+
+### Pull Request
 
 1. Fork the repo.
 2. Create a new branch (`git checkout -b feature/your-feature`).
