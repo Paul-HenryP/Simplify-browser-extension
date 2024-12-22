@@ -71,6 +71,8 @@ These scripts provide a convenient way to build and manage the extension, and ca
 
 I welcome contributions! Please fork the repository and submit a pull request with your improvements or bug fixes.
 
+- Please make sure that your contributions don't break the rest of the application.
+
 ### Development
 
 To edit this extension, follow these steps:
