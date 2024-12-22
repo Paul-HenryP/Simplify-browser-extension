@@ -9,7 +9,7 @@ Simplify is a browser extension designed to enhance your online reading experien
 - Use the extension while on the article tab.
 - The extension will automatically filter out unnecessary content and display a summarized version of the website.
 
-## Future development ideas:
+## Future development ideas (open for contributions):
 
 - Customize the summarization settings by clicking on the settings icon within the extension popup.
 
